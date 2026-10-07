@@ -1,25 +1,39 @@
-# Logs
-logs
-*.log
+# Python dependencies
+backend/requirements.txt
+
+# API keys
+backend/.env
+
+# DORA AI - Build websites with AI
+**/dora-ai-frontend/
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/dist
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# local env files
+.env.local
+.env.*.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+# Vite
+vite.config.js
+
+# Editor
 .idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.env
+.vscode/*
+!.vscode/settings.json

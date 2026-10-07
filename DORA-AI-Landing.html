@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DORA AI — Build Websites with AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --indigo: #6366f1; --purple: #a855f7; --pink: #ec4899; --black: #0a0a0a; }
+    body { font-family: 'Inter', sans-serif; background: var(--black); color: #fff; overflow-x: hidden; }
+    
+    /* Navigation */
+    nav { position: fixed; top: 0; width: 100%; z-index: 50; backdrop-filter: blur(20px); background: rgba(10,10,10,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    nav .container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    nav .logo { font-size: 1.5rem; font-weight: 900; background: linear-gradient(90deg, var(--indigo), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { color: #a1a1aa; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    nav a:hover { color: #fff; }
+    nav .btn { background: var(--indigo); color: #fff !important; padding: 0.5rem 1.25rem; border-radius: 8px; font-weight: 600; }
+    nav .btn:hover { opacity: 0.9; }
+
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem 4rem; background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 60%); }
+    .hero h1 { font-size: 5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+    .hero h1 .gradient { background: linear-gradient(90deg, var(--indigo), var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.25rem; color: #a1a1aa; max-width: 600px; margin: 0 auto 2rem; }
+    .hero .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { padding: 1rem 2.5rem; background: linear-gradient(90deg, var(--indigo), var(--purple)); border: none; border-radius: 12px; color: #fff; font-size: 1.1rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(99,102,241,0.4); }
+    .btn-secondary { padding: 1rem 2.5rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: border-color 0.3s; }
+    .btn-secondary:hover { border-color: var(--indigo); }
+
+    /* Stats */
+    .stats { display: flex; justify-content: center; gap: 4rem; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .stat { text-align: center; }
+    .stat .number { font-size: 2.5rem; font-weight: 900; background: linear-gradient(90deg, var(--indigo), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat .label { color: #71717a; font-size: 0.9rem; margin-top: 0.25rem; }
+
+    /* Features */
+    .features { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { text-align: center; font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .section-subtitle { text-align: center; color: #a1a1aa; margin-bottom: 3rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .feature-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2.5rem; transition: transform 0.3s, border-color 0.3s; }
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(99,102,241,0.4); }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+    .feature-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .feature-card p { color: #a1a1aa; font-size: 0.95rem; line-height: 1.6; }
+
+    /* How It Works */
+    .how-it-works { padding: 6rem 2rem; background: linear-gradient(180deg, transparent, rgba(99,102,241,0.05), transparent); }
+    .steps { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+    .step { text-align: center; max-width: 250px; }
+    .step .step-number { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(90deg, var(--indigo), var(--purple)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.25rem; margin: 0 auto 1rem; }
+    .step h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { color: #a1a1aa; font-size: 0.9rem; line-height: 1.5; }
+
+    /* Editor Preview */
+    .preview-section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .preview-container { background: #1a1a2e; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; box-shadow: 0 0 60px rgba(99,102,241,0.1); }
+    .preview-header { background: rgba(255,255,255,0.05); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ef4444; } .dot-yellow { background: #eab308; } .dot-green { background: #22c55e; }
+    .preview-body { padding: 2rem; min-height: 300px; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); display: flex; align-items: center; justify-content: center; }
+    .preview-body p { color: #a1a1aa; font-size: 0.9rem; }
+
+    /* Pricing */
+    .pricing { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .pricing-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2.5rem; text-align: center; }
+    .pricing-card.popular { border-color: var(--indigo); position: relative; }
+    .pricing-card.popular::before { content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, var(--indigo), var(--purple)); color: #fff; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .pricing-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .pricing-card .price { font-size: 3rem; font-weight: 900; margin: 1rem 0; }
+    .pricing-card .price span { font-size: 1rem; color: #a1a1aa; font-weight: 400; }
+    .pricing-card ul { list-style: none; text-align: left; margin: 1.5rem 0; }
+    .pricing-card li { padding: 0.5rem 0; color: #a1a1aa; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .pricing-card li::before { content: '✓ '; color: var(--indigo); font-weight: 700; }
+
+    /* Footer */
+    footer { padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+    footer p { color: #71717a; font-size: 0.9rem; }
+    footer .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+    footer a { color: #a1a1aa; text-decoration: none; font-size: 0.9rem; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .stats { flex-direction: column; gap: 1.5rem; }
+      .steps { flex-direction: column; align-items: center; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">DORA AI</div>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#" class="btn">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <h1>Describe a website.<br><span class="gradient">DORA AI builds it.</span></h1>
+    <p>Type what you want in plain English. Watch DORA AI generate a complete, responsive website in seconds. Free to start.</p>
+    <div class="cta-group">
+      <a href="#" class="btn-primary">🚀 Generate Website</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><div class="number">10K+</div><div class="label">Websites Built</div></div>
+    <div class="stat"><div class="number">5s</div><div class="label">Avg. Generation Time</div></div>
+    <div class="stat"><div class="number">99%</div><div class="label">Success Rate</div></div>
+    <div class="stat"><div class="number">Free</div><div class="label">To Start</div></div>
+  </section>
+
+  <section class="features" id="features">
+    <h2 class="section-title">Everything You Need</h2>
+    <p class="section-subtitle">Built for speed, designed for everyone.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="icon">⚡</div><h3>Instant Generation</h3><p>Describe your vision in plain English and get a fully functional website in seconds.</p></div>
+      <div class="feature-card"><div class="icon">🎨</div><h3>Modern Design</h3><p>Every site comes with glassmorphism, gradients, animations — production-ready out of the box.</p></div>
+      <div class="feature-card"><div class="icon">📱</div><h3>Fully Responsive</h3><p>Mobile, tablet, desktop — your site looks perfect on every screen size automatically.</p></div>
+      <div class="feature-card"><div class="icon">🔧</div><h3>Easy Customization</h3><p>Edit, tweak, and customize the generated code. Export as HTML and deploy anywhere.</p></div>
+      <div class="feature-card"><div class="icon">🛡️</div><h3>Secure & Reliable</h3><p>Your code stays yours. No vendor lock-in. Download and host anywhere you choose.</p></div>
+      <div class="feature-card"><div class="icon">🤖</div><h3>Powered by AI</h3><p>Runs on GPT-4o via OpenRouter. Smart enough to handle any prompt, any domain.</p></div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Three steps from idea to live website.</p>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><h4>Describe</h4><p>Type what you want — "a landing page for my bakery" or "a portfolio for a photographer."</p></div>
+      <div class="step"><div class="step-number">2</div><h4>Generate</h4><p>DORA AI processes your prompt and builds a complete HTML website with code and styling.</p></div>
+      <div class="step"><div class="step-number">3</div><h4>Deploy</h4><p>Preview, customize, download as HTML, and host it anywhere — Vercel, Netlify, or your own server.</p></div>
+    </div>
+  </section>
+
+  <section class="preview-section">
+    <h2 class="section-title">See It In Action</h2>
+    <p class="section-subtitle">Every website starts with a prompt.</p>
+    <div class="preview-container">
+      <div class="preview-header"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+      <div class="preview-body">
+        <p>🎨 DORA AI will generate a beautiful website from your prompt — preview it live here</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <h2 class="section-title">Simple Pricing</h2>
+    <p class="section-subtitle">Start free. Scale when you need it.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card"><h3>Starter</h3><div class="price">Free<span>/mo</span></div><ul><li>5 websites per month</li><li>Basic templates</li><li>Community support</li></ul><a href="#" class="btn-secondary" style="display:block;width:100%;text-align:center;">Get Started</a></div>
+      <div class="pricing-card popular"><h3>Pro</h3><div class="price">$9<span>/mo</span></div><ul><li>Unlimited websites</li><li>Premium templates</li><li>Priority support</li><li>Custom domains</li></ul><a href="#" class="btn-primary" style="display:block;width:100%;text-align:center;">Go Pro</a></div>
+      <div class="pricing-card"><h3>Enterprise</h3><div class="price">Custom</div><ul><li>Everything in Pro</li><li>Team collaboration</li><li>Dedicated support</li><li>SLA guarantee</li></ul><a href="#" class="btn-secondary" style="display:block;width:100%;text-align:center;">Contact Us</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Features</a><a href="#">Pricing</a><a href="#">Docs</a><a href="#">Blog</a><a href="#">GitHub</a>
+    </div>
+    <p>© 2025 DORA AI — Build websites with AI. Powered by OpenRouter + GPT-4o.</p>
+  </footer>
+</body>
+</html>
